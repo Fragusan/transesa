@@ -6,7 +6,7 @@ private:
     string nombre;
     string apellido ;
     int id, dni, telefono, asiento;
-    bool pago; // true=efectivo false=virtual
+    bool pago, tipo; // true=efectivo false=virtual
     string fechaDeCompra, fechaDeViaje;
     enum horario {MANIANA, MEDIODIA, TARDE, NOCHE};
     enum estado {EN_ESPERA, CONCRETADO, CANCELADO};
@@ -17,16 +17,16 @@ private:
     public:
         // Constructor
         venta(string _nombre, string _apellido, int _id, int _dni, int _telefono, int _asiento,
-               string _fechaDeCompra, string _fechaDeViaje, bool _pago,
+               string _fechaDeCompra, string _fechaDeViaje, bool _pago, bool _tipo,
                horario _horaViaje, estado _estadoVenta)
             : nombre(_nombre), apellido(_apellido), id(_id), dni(_dni), telefono(_telefono),
               asiento(_asiento), fechaDeCompra(_fechaDeCompra), fechaDeViaje(_fechaDeViaje),
-              pago(_pago), horaViaje(_horaViaje), estadoVenta(_estadoVenta) {}
+              pago(_pago), tipo(_tipo), horaViaje(_horaViaje), estadoVenta(_estadoVenta) {}
               
-        
+        //segundo constructor con menos opciones y algunas precargadas(solo a modo de priueba)
         venta(string _nombre, string _apellido, int _id, int _dni, int _telefono, int _asiento)
         : nombre(_nombre), apellido(_apellido), id(_id), dni(_dni), telefono(_telefono),
-          asiento(_asiento), pago(true), // Pago predeterminado en efectivo
+          asiento(_asiento), pago(true), tipo(false), // Pago predeterminado en efectivo
           fechaDeCompra("29/10/2024"), fechaDeViaje("02/11/2024"), // Fechas predeterminadas
           horaViaje(MANIANA), estadoVenta(EN_ESPERA) {}
           
@@ -40,6 +40,7 @@ private:
                  << "ID: " << id << "\n"
                  << "DNI: " << dni << "\n"
                  << "Teléfono: " << telefono << "\n"
+                 << "Tipo: " << (tipo ? "Ida" : "Vuelta") << "\n"
                  << "Asiento: " << asiento << "\n"
                  << "Fecha de Compra: " << fechaDeCompra << "\n"
                  << "Fecha de Viaje: " << fechaDeViaje << "\n"
@@ -60,6 +61,9 @@ private:
             string getFechaDeViaje() const { return fechaDeViaje; }
             string getPago() const {
                     return pago ? "Efectivo" : "Virtual";
+                }
+            string getTipo() const {
+                    return tipo ? "Ida" : "Vuelta";
                 }
             string getHoraViaje() const {
                     switch (horaViaje) {
@@ -90,6 +94,7 @@ private:
             void setFechaDeCompra(const string& _fechaDeCompra) { fechaDeCompra = _fechaDeCompra; }
             void setFechaDeViaje(const string& _fechaDeViaje) { fechaDeViaje = _fechaDeViaje; }
             void setPago(bool _pago) { pago = _pago; }
+            void setTipo(bool _tipo) { tipo = _tipo; }
             void setHoraViaje(horario _horaViaje) { horaViaje = _horaViaje; }
             void setEstadoVenta(estado _estadoVenta) { estadoVenta = _estadoVenta; }
             
