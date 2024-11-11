@@ -1,8 +1,10 @@
 #include "colors.h" //libreria de github para colorear fondos y textos
 #include <iostream>
+#include <vector>
 #include <windows.h>
 #include <conio.h>
 #include "estampaTemporal.h"
+
 using namespace std;
 
 
@@ -197,6 +199,65 @@ void splash(){
 	parpadeo("PRESIONA ENTER PARA INICIAR", 24, 'e');
 	charger("Cargando base de datos...");
 }
+
+void generarTabla(int xInicial, int yInicial, const vector<int>& anchosColumnas, const vector<string>& titulos) {
+    int numColumnas = anchosColumnas.size();
+    int xActual = xInicial;
+    int ySuperior = yInicial;
+    int yInferior = yInicial + 2;
+
+    // Dibujar cada celda de la tabla con el ancho especificado para cada columna
+    for (int i = 0; i < numColumnas; ++i) {
+        int xFinal = xActual + anchosColumnas[i];
+
+        // Usa `cuadrito` para dibujar el borde de cada columna
+        int esquinaIzqSup = (i == 0) ? 201 : 203;
+        int esquinaDerSup = (i == numColumnas - 1) ? 187 : 202;
+        int esquinaIzqInf = (i == 0) ? 200 : 202;
+        int esquinaDerInf = (i == numColumnas - 1) ? 188 : 202;
+
+        cuadrito(xActual, ySuperior, xFinal, yInferior, esquinaIzqSup, esquinaDerSup, esquinaDerInf, esquinaIzqInf);
+
+        // Imprimir título en el centro de la celda
+        int xTexto = xActual + (anchosColumnas[i] / 2) - (titulos[i].length() / 2);
+        gotoxy(xTexto, ySuperior + 1);
+        cout << titulos[i];
+
+        // Mover la posición xActual para la siguiente celda
+        xActual += anchosColumnas[i];
+    }
+}
+
+void generarTablaConInterior(int xInicial, int yInicial, const vector<int>& anchosColumnas, const vector<string>& titulos) {
+    int numColumnas = anchosColumnas.size();
+    int xActual = xInicial;
+    int ySuperior = yInicial;
+    int yInferior = yInicial + 2;
+
+    // Dibujar cada celda de la tabla con el ancho especificado para cada columna
+    for (int i = 0; i < numColumnas; ++i) {
+        int xFinal = xActual + anchosColumnas[i];
+
+        // Configurar caracteres de esquina para dar sensación de continuidad
+        int esquinaIzqSup = (i == 0) ? 204 : 206;       // 204 para el borde izquierdo
+        int esquinaDerSup = (i == numColumnas - 1) ? 185 : 206; // 185 para el borde derecho
+        int esquinaIzqInf = (i == 0) ? 204 : 202;
+        int esquinaDerInf = (i == numColumnas - 1) ? 185 : 202;
+
+        cuadrito(xActual, ySuperior, xFinal, yInferior, esquinaIzqSup, esquinaDerSup, esquinaDerInf, esquinaIzqInf);
+
+        // Imprimir título en el centro de la celda
+        int xTexto = xActual + (anchosColumnas[i] / 2) - (titulos[i].length() / 2);
+        gotoxy(xTexto, ySuperior + 1);
+        cout << titulos[i];
+
+        // Mover la posición xActual para la siguiente celda
+        xActual += anchosColumnas[i];
+    }
+}
+
+
+
 // inicio (){
 //	membrete ();
 //	cartelLogoEmpresa()

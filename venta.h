@@ -1,4 +1,3 @@
-//ejemplo
 using namespace std;
 
 class venta {
