@@ -27,37 +27,6 @@ void otro(){
 	gotoxy(65,26);
 }
 
-void otre(){
-	cout << GREEN;
-	textoCentro("T R A N S E S A",3);
-	cout << BLACK;
-	textoCentro("MENU CONSULTAR VENTAS",5);
-    textoCentro("*********************",6);
-	vector<string> titulos = {" ID", "DNI", "Apellido", "F.Compra", "F.Viaje", "Hora", "Tipo", "Estado", "Asiento"};
-    vector<int> anchosColumnas = {5, 10, 12, 12, 12, 10, 8, 12, 10};
-
-    generarTabla(4, 8, anchosColumnas, titulos);
-    
-    vector<string> titulos1 = {" 58", "45123456", "Campisi", "01/11/2024", "04/11/2024", "Tarde", "Ida", "En espera", "18"};
-    vector<string> titulos2 = {" 57", "33654789", "Diaz", "01/11/2024", "04/11/2024", "Noche", "Ida", "En espera", "12"};
-    vector<string> titulos3 = {" 56", "24563987", "Figueroa", "31/10/2024", "04/11/2024", "Tarde", "Vuelta", "En espera", "08"};
-    vector<string> titulos4 = {" 55", "27854196", "Paz", "24/10/2024", "04/11/2024", "Noche", "Ida", "Cancelado", "24"};
-    vector<string> titulos5 = {" 54", "24365478", "Flores", "22/10/2024", "04/11/2024", "Noche", "Vuelta", "En espera", "16"};
-    
-    generarTablaConInterior(4, 10, anchosColumnas, titulos1);//58
-    generarTablaConInterior(4, 12, anchosColumnas, titulos2);
-    generarTablaConInterior(4, 14, anchosColumnas, titulos3);
-    generarTablaConInterior(4, 16, anchosColumnas, titulos4);
-    generarTablaConInterior(4, 18, anchosColumnas, titulos5);//5
-    
-    gotoxy(42,22);cout << "1 VOLVER AL MENU PRINCIPAL"<< endl;
-    gotoxy(42,24);cout << "0 SALIR"<< endl;
-    gotoxy(42,27);cout << "OPCION SELECCIONADA: -> |"<< endl;
-    
-	gotoxy(70,29);
-}
-
-
 void principal(){
 		int opc;
 	do{
@@ -112,6 +81,76 @@ void principal(){
 		}
 	}while (opc<0 || opc > 4);
 }
+
+void otre(){
+	int opc;
+	do{
+	cout << GREEN;
+	cuadrito(41,1,59,3);
+	//textoCentro("###################",1);
+	textoCentro(" T R A N S E S A ",2);
+	//textoCentro("###################",3);
+	cout << BLACK;
+	textoCentro("MENU CONSULTAR VENTAS",4);
+    textoCentro("*********************",5);
+    
+    //encabezado de tabla
+	vector<string> titulos = {" ID", "DNI", "Apellido", "F.Compra", "F.Viaje", "Hora", "Tipo", "Estado", "Asiento"};
+    vector<int> anchosColumnas = {5, 10, 12, 12, 12, 10, 8, 12, 10};
+    
+    //carga de datos tablas (hacerlo con db)
+    vector<string> titulos1 = {" 58", "45123456", "Campisi", "01/11/2024", "04/11/2024", "Tarde", "Ida", "En espera", "18"};
+    vector<string> titulos2 = {" 57", "33654789", "Diaz", "01/11/2024", "04/11/2024", "Noche", "Ida", "En espera", "12"};
+    vector<string> titulos3 = {" 56", "27364482", "Moyano", "17/11/2024", "19/11/2024", "Noche", "Vuelta", "En espera", "08"};
+    vector<string> titulos4 = {" 55", "27854196", "Paz", "24/10/2024", "04/11/2024", "Noche", "Ida", "Cancelado", "24"};
+    vector<string> titulos5 = {" 54", "24365478", "Flores", "22/10/2024", "04/11/2024", "Noche", "Vuelta", "En espera", "16"};
+    
+    //generarTablaConInterior(4, 9, anchosColumnas, titulos1);//58
+    
+    //columnas inicial hasta penultima
+    generarInteriorSimple(4, 9, anchosColumnas, titulos1);
+    generarInteriorSimple(4, 11, anchosColumnas, titulos2);
+    generarInteriorSimple(4, 13, anchosColumnas, titulos3);
+    generarInteriorSimple(4, 15, anchosColumnas, titulos4);
+    //generarInteriorSimple(4, 17, anchosColumnas, titulos5);//5
+    
+    //encabezado de tabla (luego de cuerpo)
+    generarTabla(4, 7, anchosColumnas, titulos); // encabezado
+    
+    //ultima fila porque es diferente
+    generarSimpleFinal(4, 17, anchosColumnas, titulos5, true);//ultima fila
+    alternarLocale();
+    textoCentro("Use el teclado númerico para seleccionar una de las opciones", 20);
+    gotoxy(42,22);cout << "1 VOLVER AL MENU PRINCIPAL"<< endl;
+    gotoxy(42,24);cout << "0 SALIR"<< endl;
+    gotoxy(42,27);cout << "OPCION SELECCIONADA: -> ";
+    showCur();
+    scanf("%i", &opc);
+    
+    switch (opc){
+    	case 0:
+    		break;
+    		
+    	case 1:
+    		alternarLocale();
+    		principal();
+    		break;
+    		
+    	default :
+    		cout << WINE;
+			textoCentro("OPCION INGRESADA NO VÁLIDA", 7);
+			cout << BLACK;
+			Sleep(600);
+    		break;
+	}
+	}while (opc<0 || opc > 1);
+	
+	gotoxy(70,29);
+	
+}
+
+
+
 #endif 
 
 

@@ -15,12 +15,12 @@ void nuevaVenta(){
     		textoCentro("*********************",12);
     		alternarLocale();
     		hiddenCur();
-    		textoCentro("Usa el teclado nï¿½merico para seleccionar una de las opciones", 14);
+    		textoCentro("Usa el teclado númerico para seleccionar una de las opciones", 14);
     		gotoxy(20, 16);printf("1. REALIZAR NUEVA VENTA");
     		gotoxy(20, 17);printf("2. VOLVER AL MENU PRINCIPAL");//
     		gotoxy(20, 18);
     		gotoxy(20, 19);cout << WINE << "0. SALIR" << BLACK;
-    		gotoxy(20, 24);printf("OPCIï¿½N SELECCIONADA: -> ");
+    		gotoxy(20, 24);printf("OPCIÓN SELECCIONADA: -> ");
     		showCur();
     		alternarLocale();
     		string entrada;
@@ -29,7 +29,7 @@ void nuevaVenta(){
     		if (entrada.size() == 1 && isdigit(entrada[0])) {
                         opc = stoi(entrada);
                     } else {
-                        gotoxy(20, 21); cout << WINE << "Entrada no vï¿½lida. Intente nuevamente." << BLACK;
+                        gotoxy(20, 21); cout << WINE << "Entrada no válida. Intente nuevamente." << BLACK;
                         continue;
                     }
 
@@ -40,14 +40,27 @@ void nuevaVenta(){
                                     bool pago;
                                     int horaViaje, estadoVenta;
                                     
-                                    cin.ignore(); 
+                                    system("cls");
+									system("mode con: cols=100 lines=30");
+									system("color 70");
+                                    membrete();
+									cartelLogoEmpresa();
+									textoCentro("MENU NUEVA VENTA",11);
+									textoCentro("*********************",12);
+									alternarLocale();
+									//hiddenCur();
+                                    //cin.ignore(); 
+                                    gotoxy(20, 14);
                                     cout << "Ingrese el nombre del cliente: ";
                                     getline(cin, nombre);
+                                    gotoxy(20, 15);
                                     cout << "Ingrese el apellido del cliente: ";
                                     getline(cin, apellido);
+                                    gotoxy(20, 16);
                                     cout << "Ingrese el DNI del cliente: ";
                                     cin >> dni;
-                                    cout << "Ingrese el telï¿½fono del cliente: ";
+                                    gotoxy(20, 17);
+                                    cout << "Ingrese el teléfono del cliente: ";
                                     cin >> telefono;
                                     cin.ignore(); 
                                     // Resto de la captura de datos
@@ -61,9 +74,10 @@ void nuevaVenta(){
                                     //venta.setHorario(static_cast<venta::horario>(horaViaje));
 									//venta.setEstado(static_cast<venta::estado>(estadoVenta));
                                     //venta.guardarEnArchivo("ventas.json");
-
+									gotoxy(20, 19);
                                     cout << "Venta registrada exitosamente.\n";
                                     cout << actual.getInfo();
+                                    alternarLocale();
                                     Sleep(12000);
                                     break;
                                 }
@@ -75,7 +89,7 @@ void nuevaVenta(){
                                 	opc=0;
                                 	break;
                                 default:
-                                    cout << "OpciÃ³n invÃ¡lida, por favor intente de nuevo.\n";
+                                    cout << "Opción inválida, por favor intente de nuevo.\n";
                             }
 
     	}while (opc != 0);

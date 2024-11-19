@@ -1,14 +1,16 @@
 #include <iostream>
 #include "utils.h"
 #include "menuPrincipal.h"
+#include "Mysql.h"
 using namespace std;
 
 int main() {
 	//splash();
 	//principal();
-	membrete();
+	//membrete(); ---->
 	//cartelLogoEmpresa();
 	//otro();
-	otre();
+	//otre();  ---->
+	mirando();
 	return 0;
 }

@@ -221,11 +221,12 @@ void generarTabla(int xInicial, int yInicial, const vector<int>& anchosColumnas,
         // Imprimir título en el centro de la celda
         int xTexto = xActual + (anchosColumnas[i] / 2) - (titulos[i].length() / 2);
         gotoxy(xTexto, ySuperior + 1);
-        cout << titulos[i];
+        cout  << ORANGE<< titulos[i];
 
         // Mover la posición xActual para la siguiente celda
         xActual += anchosColumnas[i];
     }
+    cout  << BLACK;
 }
 
 void generarTablaConInterior(int xInicial, int yInicial, const vector<int>& anchosColumnas, const vector<string>& titulos) {
@@ -256,6 +257,109 @@ void generarTablaConInterior(int xInicial, int yInicial, const vector<int>& anch
     }
 }
 
+void cuadritoSimple(int xs, int ys, int xe, int ye, int esquina1, int esquina2, int esquina3, int esquina4){ //hacer sobrecarga de metodo para cuadro anidado
+	int i;
+	//control horizontal
+	for (i= xs; i<= xe; i++){
+		gotoxy(i,ys); printf("%c\n", 196);
+		gotoxy(i,ye); printf("%c\n", 196);
+	}
+	//control vertical
+	for (i= ys; i<= ye; i++){
+		gotoxy(xs,i); printf("%c\n", 179);
+		gotoxy(xe,i); printf("%c\n", 179);
+	}
+	//primera esquina
+	gotoxy(xs,ys); printf("%c\n", esquina1);
+	//segunda esquina
+	gotoxy(xe,ys); printf("%c\n", esquina2);
+	//tercera esquina
+	gotoxy(xe,ye); printf("%c\n", esquina3);
+	//cuarta esquina
+	gotoxy(xs,ye); printf("%c\n", esquina4);
+}
+
+void generarInteriorSimple(int xInicial, int yInicial, const vector<int>& anchosColumnas, const vector<string>& titulos) {
+    int numColumnas = anchosColumnas.size();
+    int xActual = xInicial;
+    int ySuperior = yInicial;
+    int yInferior = yInicial + 2;
+
+    // Dibujar cada celda de la tabla con el ancho especificado para cada columna
+    for (int i = 0; i < numColumnas; ++i) {
+        int xFinal = xActual + anchosColumnas[i];
+
+        // Configurar caracteres de esquina para dar sensación de continuidad
+        int esquinaIzqSup = (i == 0) ? 195 : 197;       // 204 para el borde izquierdo
+        int esquinaDerSup = (i == numColumnas - 1) ? 180 : 197; // 185 para el borde derecho
+        int esquinaIzqInf = (i == 0) ? 195 : 193;
+        int esquinaDerInf = (i == numColumnas - 1) ? 180 : 193;
+
+        cuadritoSimple(xActual, ySuperior, xFinal, yInferior, esquinaIzqSup, esquinaDerSup, esquinaDerInf, esquinaIzqInf);
+
+        // Imprimir título en el centro de la celda
+        int xTexto = xActual + (anchosColumnas[i] / 2) - (titulos[i].length() / 2);
+        gotoxy(xTexto, ySuperior + 1);
+        cout << titulos[i];
+
+        // Mover la posición xActual para la siguiente celda
+        xActual += anchosColumnas[i];
+    }
+}
+
+void cuadritoSimpleFinal(int xs, int ys, int xe, int ye, int esquina1, int esquina2, int esquina3, int esquina4) {
+    int i;
+    // Control horizontal
+    for (i = xs; i <= xe; i++) {
+        gotoxy(i, ys);
+        printf("%c\n", 196); // Línea horizontal
+        gotoxy(i, ye);
+        printf("%c\n", 196); // Línea horizontal
+    }
+    // Control vertical
+    for (i = ys; i <= ye; i++) {
+        gotoxy(xs, i);
+        printf("%c\n", 179); // Línea vertical
+        gotoxy(xe, i);
+        printf("%c\n", 179); // Línea vertical
+    }
+    // Esquinas
+    gotoxy(xs, ys);
+    printf("%c\n", esquina1); // Esquina superior izquierda
+    gotoxy(xe, ys);
+    printf("%c\n", esquina2); // Esquina superior derecha
+    gotoxy(xe, ye);
+    printf("%c\n", esquina3); // Esquina inferior derecha
+    gotoxy(xs, ye);
+    printf("%c\n", esquina4); // Esquina inferior izquierda
+}
+
+void generarSimpleFinal(int xInicial, int yInicial, const vector<int>& anchosColumnas, const vector<string>& titulos, bool esUltimaFila) {
+    int numColumnas = anchosColumnas.size();
+    int xActual = xInicial;
+    int ySuperior = yInicial;
+    int yInferior = yInicial + 2;
+
+    for (int i = 0; i < numColumnas; ++i) {
+        int xFinal = xActual + anchosColumnas[i];
+
+        // Configurar caracteres de esquina según sea la última fila
+        int esquinaIzqSup = (i == 0) ? 195 : 197; // Código 195 para la primera columna
+        int esquinaDerSup = (i == numColumnas - 1) ? 180 : 197;
+        int esquinaIzqInf = (i == 0 && esUltimaFila) ? 192 : 193; // Código 192 para última fila
+        int esquinaDerInf = (i == numColumnas - 1 && esUltimaFila) ? 217 : 180; // Código 217 para última fila
+
+        cuadritoSimpleFinal(xActual, ySuperior, xFinal, yInferior, esquinaIzqSup, esquinaDerSup, esquinaDerInf, esquinaIzqInf);
+
+        // Imprimir título centrado
+        int xTexto = xActual + (anchosColumnas[i] / 2) - (titulos[i].length() / 2);
+        gotoxy(xTexto, ySuperior + 1);
+        cout << titulos[i];
+
+        // Avanzar posición
+        xActual += anchosColumnas[i];
+    }
+}
 
 
 // inicio (){

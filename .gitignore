@@ -1,0 +1,5 @@
+# Ignorar archivos específicos
+Mysql.h
+libcrypto-3-x64.dll
+libmysql.dll
+libssl-3-x64.dll
