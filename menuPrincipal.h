@@ -2,31 +2,6 @@
 #define menuPrincipal.h
 #include "menuVenta.h"
 
-void otro(){
-	textoCentro("MENU CONSULTAR VENTAS",11);
-    textoCentro("*********************",12);
-	cuadrito(4,13,9,15,201,153,188,200);//4 ID
-	cuadrito(9,13,19,15,203,202,188,202);//10 DNI
-	cuadrito(19,13,33,15,203,202,188,202);//apellido
-	cuadrito(33,13,42,15,203,202,188,202);//f compra
-	cuadrito(42,13,54,15,203,202,188,202);//f de viaje
-	cuadrito(54,13,64,15,203,202,188,202);//hora
-	cuadrito(64,13,74,15,203,202,188,202);//tipo
-	cuadrito(74,13,85,15,203,202,188,202);//estado
-	cuadrito(85,13,96,15,203,187,188,202);
-	
-	gotoxy(6,14);cout << "ID";
-	gotoxy(13,14);cout << "DNI";
-	gotoxy(23,14);cout << "Apellido";
-	gotoxy(36,14);cout << "Tipo";
-	gotoxy(46,14);cout << "Hora";
-	gotoxy(56,14);cout << "F.Viaje";
-	gotoxy(66,14);cout << "F.Compra";
-	gotoxy(77,14);cout << "Estado";
-	gotoxy(88,14);cout << "Asiento";
-	gotoxy(65,26);
-}
-
 void principal(){
 		int opc;
 	do{
@@ -37,11 +12,11 @@ void principal(){
 		alternarLocale();
 		hiddenCur();
 		textoCentro("Usa el teclado númerico para seleccionar una de las opciones", 14);
-		gotoxy(20, 16);printf("1. REALIZAR NUEVA VENTA");//en menu 1 y 2 deberia tambien dejarme modificar el nivel de dificultad
-		gotoxy(20, 17);printf("2. CONSULTAR VENTAS");//
-		gotoxy(20, 18);printf("3. MODIFICAR VENTA/TICKET"); // MUSICA, CAMBIAR COLOR, SONIDOS, NIVEL
-		gotoxy(20, 19);printf("4. CANCELACIÓN PARCIAL DE VENTA/TICKET");
-		gotoxy(20, 20);printf("5. CANCELACIÓN TOTAL DE VENTA/TICKET");
+		gotoxy(20, 16);printf("1. REALIZAR NUEVA VENTA");
+		gotoxy(20, 17);printf("2. CONSULTAR VENTAS"); //mostrar tabla 
+		gotoxy(20, 18);printf("3. MODIFICAR VENTA/TICKET"); // cambiar datos de cliente
+		gotoxy(20, 19);printf("4. CANCELACIÓN PARCIAL DE VENTA/TICKET"); // cambiar pago a en espera
+		gotoxy(20, 20);printf("5. CANCELACIÓN TOTAL DE VENTA/TICKET"); // liberacion de asiento asignado
 		gotoxy(20, 21);
 		gotoxy(20, 22);printf("0. SALIR");
 		gotoxy(20, 24);printf("OPCIÓN SELECCIONADA: -> ");
@@ -80,6 +55,31 @@ void principal(){
 			break;
 		}
 	}while (opc<0 || opc > 4);
+}
+
+void otro(){
+	textoCentro("MENU CONSULTAR VENTAS",11);
+    textoCentro("*********************",12);
+	cuadrito(4,13,9,15,201,153,188,200);//4 ID
+	cuadrito(9,13,19,15,203,202,188,202);//10 DNI
+	cuadrito(19,13,33,15,203,202,188,202);//apellido
+	cuadrito(33,13,42,15,203,202,188,202);//f compra
+	cuadrito(42,13,54,15,203,202,188,202);//f de viaje
+	cuadrito(54,13,64,15,203,202,188,202);//hora
+	cuadrito(64,13,74,15,203,202,188,202);//tipo
+	cuadrito(74,13,85,15,203,202,188,202);//estado
+	cuadrito(85,13,96,15,203,187,188,202);
+	
+	gotoxy(6,14);cout << "ID";
+	gotoxy(13,14);cout << "DNI";
+	gotoxy(23,14);cout << "Apellido";
+	gotoxy(36,14);cout << "Tipo";
+	gotoxy(46,14);cout << "Hora";
+	gotoxy(56,14);cout << "F.Viaje";
+	gotoxy(66,14);cout << "F.Compra";
+	gotoxy(77,14);cout << "Estado";
+	gotoxy(88,14);cout << "Asiento";
+	gotoxy(65,26);
 }
 
 void otre(){
@@ -150,7 +150,4 @@ void otre(){
 }
 
 
-
 #endif 
-
-

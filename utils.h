@@ -5,6 +5,7 @@
 #include <conio.h>
 #include "estampaTemporal.h"
 
+
 using namespace std;
 
 
@@ -71,6 +72,28 @@ void cuadrito(int xs, int ys, int xe, int ye, int esquina1, int esquina2, int es
 	gotoxy(xe,ye); printf("%c\n", esquina3);
 	//cuarta esquina
 	gotoxy(xs,ye); printf("%c\n", esquina4);
+}
+
+void cuadritoLineaEfecto(int xs, int ys, int xe, int ye){ // genera marcos decorativos con relieve simulado
+	int i;
+	//control horizontal
+	for (i= xs; i<= xe; i++){
+		gotoxy(i,ys); printf("%c", 196);
+		gotoxy(i,ye); printf("%c", 205);
+	}
+	//control vertical
+	for (i= ys; i<= ye; i++){
+		gotoxy(xs,i); printf("%c", 179);
+		gotoxy(xe,i); printf("%c", 186);
+	}
+	//primera esquina
+	gotoxy(xs,ys); printf("%c", 218);
+	//segunda esquina
+	gotoxy(xe,ys); printf("%c", 191);
+	//tercera esquina
+	gotoxy(xe,ye); printf("%c", 188);
+	//cuarta esquina
+	gotoxy(xs,ye); printf("%c", 192);
 }
 
 void margen(){
@@ -359,6 +382,20 @@ void generarSimpleFinal(int xInicial, int yInicial, const vector<int>& anchosCol
         // Avanzar posición
         xActual += anchosColumnas[i];
     }
+}
+
+int errorMsj (int a, int b, int c, int d,char *msj, bool bandera){
+		hiddenCur();
+    	cuadritoLineaEfecto(a,b,c,d);
+    	alternarLocale();
+    	cout << WINE;
+    	textoCentro(msj,21);
+        cout  << BLACK;
+        Sleep(1500);
+        alternarLocale();
+        cin.ignore();
+        //if(bandera){ principal();}
+        return 0;
 }
 
 

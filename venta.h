@@ -1,11 +1,15 @@
+#ifndef VENTA_H
+#define VENTA_H
+
 using namespace std;
 
 class venta {
 private:
     string nombre;
     string apellido ;
-    int id, dni, telefono, asiento;
-    bool pago, tipo; // true=efectivo false=virtual
+    string telefono;
+    int id, dni, asiento;
+    bool pago, tipo; // true=efectivo false=virtual  tipo|| ida=true vuelta=false
     string fechaDeCompra, fechaDeViaje;
     enum horario {MANIANA, MEDIODIA, TARDE, NOCHE};
     enum estado {EN_ESPERA, CONCRETADO, CANCELADO};
@@ -15,7 +19,7 @@ private:
 
     public:
         // Constructor
-        venta(string _nombre, string _apellido, int _id, int _dni, int _telefono, int _asiento,
+        venta(string _nombre, string _apellido, int _id, int _dni, string _telefono, int _asiento,
                string _fechaDeCompra, string _fechaDeViaje, bool _pago, bool _tipo,
                horario _horaViaje, estado _estadoVenta)
             : nombre(_nombre), apellido(_apellido), id(_id), dni(_dni), telefono(_telefono),
@@ -23,7 +27,7 @@ private:
               pago(_pago), tipo(_tipo), horaViaje(_horaViaje), estadoVenta(_estadoVenta) {}
               
         //segundo constructor con menos opciones y algunas precargadas(solo a modo de priueba)
-        venta(string _nombre, string _apellido, int _id, int _dni, int _telefono, int _asiento)
+        venta(string _nombre, string _apellido, int _id, int _dni, string _telefono, int _asiento)
         : nombre(_nombre), apellido(_apellido), id(_id), dni(_dni), telefono(_telefono),
           asiento(_asiento), pago(true), tipo(false), // Pago predeterminado en efectivo
           fechaDeCompra("29/10/2024"), fechaDeViaje("02/11/2024"), // Fechas predeterminadas
@@ -54,7 +58,7 @@ private:
             string getApellido() const { return apellido; }
             int getId() const { return id; }
             int getDni() const { return dni; }
-            int getTelefono() const { return telefono; }
+            string getTelefono() const { return telefono; }
             int getAsiento() const { return asiento; }
             string getFechaDeCompra() const { return fechaDeCompra; }
             string getFechaDeViaje() const { return fechaDeViaje; }
@@ -66,8 +70,8 @@ private:
                 }
             string getHoraViaje() const {
                     switch (horaViaje) {
-                        case MANIANA: return "MaÃ±ana";
-                        case MEDIODIA: return "MediodÃ­a";
+                        case MANIANA: return "Mañana";
+                        case MEDIODIA: return "Mediodía";
                         case TARDE: return "Tarde";
                         case NOCHE: return "Noche";
                         default: return "Desconocido";
@@ -88,7 +92,7 @@ private:
             void setApellido(const string& _apellido) { apellido = _apellido; }
             void setId(int _id) { id = _id; }
             void setDni(int _dni) { dni = _dni; }
-            void setTelefono(int _telefono) { telefono = _telefono; }
+            void setTelefono(const string& _telefono) { telefono = _telefono; }
             void setAsiento(int _asiento) { asiento = _asiento; }
             void setFechaDeCompra(const string& _fechaDeCompra) { fechaDeCompra = _fechaDeCompra; }
             void setFechaDeViaje(const string& _fechaDeViaje) { fechaDeViaje = _fechaDeViaje; }
@@ -98,3 +102,5 @@ private:
             void setEstadoVenta(estado _estadoVenta) { estadoVenta = _estadoVenta; }
             
 };
+
+#endif
