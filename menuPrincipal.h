@@ -36,7 +36,7 @@ void principal(){
 			
 			break;
 		case 3:
-			
+			modificarVenta();
 			break;
 		case 4:
 			

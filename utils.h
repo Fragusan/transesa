@@ -384,17 +384,21 @@ void generarSimpleFinal(int xInicial, int yInicial, const vector<int>& anchosCol
     }
 }
 
-int errorMsj (int a, int b, int c, int d,char *msj, bool bandera){
+int errorMsj (int a, int b, int c, int d,char *msj, bool bandera, int posicionTexto){
 		hiddenCur();
     	cuadritoLineaEfecto(a,b,c,d);
     	alternarLocale();
     	cout << WINE;
-    	textoCentro(msj,21);
+    	if(bandera){
+			textoCentro(msj,posicionTexto);
+			}else{
+			textoCentro(msj,21);
+			}
         cout  << BLACK;
         Sleep(1500);
         alternarLocale();
         cin.ignore();
-        //if(bandera){ principal();}
+        
         return 0;
 }
 
